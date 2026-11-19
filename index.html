@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>타운홀 포상 선정 기준 의견 설문</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ===== 설정: Apps Script 웹 앱 URL을 아래 ENDPOINT에 넣으세요 (index.html 하단 스크립트) ===== */
+:root{--bg:#f6f3ec;--paper:#fff;--ink:#1b1b2f;--muted:#6b6f7a;--line:#e6e0d3;--r:#ef3554;--o:#ff9b00;--g:#737373;--soft:#fff4e0}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%}
+.wrap{max-width:720px;margin:0 auto;padding:28px 18px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.top svg{height:22px;width:auto}
+.eyebrow{font-size:14px;font-weight:700;color:var(--r)}
+h1{font-size:28px;line-height:1.3;margin:4px 0 10px;letter-spacing:-.02em;word-break:keep-all}
+h1 .o{background:var(--o);padding:0 4px}
+.lead{color:#3b3f48;margin:0 0 6px;word-break:keep-all}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 26px}
+.meta span{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px;font-weight:700}
+.meta span b{color:var(--r)}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 18px;margin-bottom:14px}
+.q h2{font-size:18px;margin:0 0 4px;display:flex;gap:8px;align-items:baseline;word-break:keep-all}
+.q h2 .n{flex:none;background:var(--ink);color:#fff;border-radius:6px;font-size:13px;padding:1px 8px}
+.q h2 .req{color:var(--r);font-size:13px;font-weight:700}
+.q .help{font-size:14px;color:var(--muted);margin:0 0 12px;word-break:keep-all}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color .12s,background .12s}
+.opt:hover{border-color:#cfc6b4}
+.opt input{margin-top:5px;accent-color:var(--r);width:18px;height:18px;flex:none}
+.opt:has(input:checked){border-color:var(--r);background:#fff7f8}
+.opt .t{font-weight:700;word-break:keep-all}
+.opt .d{font-size:14px;color:var(--muted);word-break:keep-all}
+.opt>div{flex:1;min-width:0}
+.bar{display:flex;height:22px;border-radius:5px;overflow:hidden;gap:2px;margin-top:6px;width:100%;max-width:320px}
+.bar i{display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-size:12px;font-weight:700}
+ .ratio{grid-template-columns:repeat(4,1fr)}
+.ratio .opt{flex-direction:column;gap:6px;padding:12px 10px}
+.ratio .opt input{margin:0}
+.ratio .opt>div{width:100%;flex:1;display:flex;flex-direction:column}
+.ratio .bar{max-width:none;margin-top:auto}
+.ratio .opt .d{margin-bottom:6px}
+.ratio .opt .d{font-size:13px;line-height:1.4}
+@media (max-width:560px){.ratio{grid-template-columns:repeat(2,1fr)}}
+.fx{white-space:nowrap;color:var(--ink);font-size:15px}
+.legend{display:flex;gap:14px;font-size:13px;color:var(--muted);margin:-4px 0 12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+textarea,input[type=text],select{width:100%;font:inherit;font-size:16px;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff;color:var(--ink)}
+textarea{min-height:96px;resize:vertical}
+textarea:focus,input[type=text]:focus,select:focus{outline:none;border-color:var(--o)}
+.etc{margin-top:8px}
+.tbl{display:grid;gap:6px;margin:0 0 12px}
+.tbl div{display:grid;grid-template-columns:52px 1fr auto;gap:8px;align-items:center;background:#faf8f3;border-radius:8px;padding:8px 10px;font-size:14px}
+.tbl b{font-weight:900}.tbl span{color:#3b3f48;word-break:keep-all}
+.tbl em{font-style:normal;font-size:11px;font-weight:700;color:#fff;border-radius:4px;padding:1px 6px;white-space:nowrap}
+.tbl .h{background:#737373}.tbl .d2{background:#3d6fb6}.tbl .j{background:var(--r)}
+.anon{background:var(--soft);border-radius:10px;padding:12px 14px;font-size:14px;margin:6px 0 18px;word-break:keep-all}
+.anon b{color:#a55f00}
+button{width:100%;font:inherit;font-size:18px;font-weight:900;color:#fff;background:var(--ink);border:0;border-radius:12px;padding:16px;cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset:2px}
+.err{color:var(--r);font-size:14px;font-weight:700;margin:8px 0 0;min-height:1em}
+.done,.closed{display:none;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 20px;text-align:center}
+.done h2,.closed h2{margin:0 0 8px;font-size:22px}
+.done p,.closed p{margin:0;color:#3b3f48;word-break:keep-all}
+.foot{margin-top:26px;font-size:13px;color:var(--muted);text-align:center}
+.missing{outline:2px solid var(--r);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="eyebrow">26년 4분기 전사 타운홀</div><svg xmlns="http://www.w3.org/2000/svg" viewBox="21.05 6.60 496.07 85.24"><g fill="#FFA500"><path d="M 384.77 26.36 C 390.29 26.36 394.65 21.99 394.65 16.48 C 394.65 10.96 390.29 6.6 384.77 6.6 C 379.26 6.6 374.89 10.96 374.89 16.48 C 374.89 21.99 379.26 26.36 384.77 26.36 "/><path d="M 75.96 46.11 L 58.5 46.11 L 58.5 58.75 L 73.9 58.75 C 79.88 58.75 81.25 60.82 81.25 64.73 C 81.25 70.7 74.82 77.82 61.49 77.82 C 46.33 77.82 37.14 65.64 37.14 51.86 C 37.14 37.38 47.02 25.9 61.49 25.9 C 69.3 25.9 75.28 28.66 81.94 34.17 L 91.59 24.06 C 84.47 16.71 73.44 11.88 61.49 11.88 C 37.83 11.88 21.05 30.03 21.05 51.86 C 21.05 76.45 39.66 91.84 61.49 91.84 C 80.33 91.84 95.5 79.89 95.5 62.43 C 95.5 50.48 87.68 46.11 75.96 46.11 "/><path d="M 377.65 89.31 L 392.12 89.31 L 392.12 32.56 L 377.65 32.56 Z M 377.65 89.31 "/><path d="M 431.64 43.13 C 439.23 43.13 442.9 47.04 445.43 49.79 L 455.08 41.07 C 449.79 33.94 441.75 29.57 431.64 29.57 C 413.26 29.57 400.86 42.67 400.86 59.9 C 400.86 77.14 413.26 90 431.64 90 C 441.52 90 450.25 85.63 455.08 79.2 L 446.12 69.78 C 443.13 72.77 437.62 76.45 431.64 76.45 C 422.68 76.45 415.56 69.78 415.56 59.9 C 415.56 50.02 422.68 43.13 431.64 43.13 "/><path d="M 491.84 30.95 C 487.25 30.95 480.58 32.56 476.45 36.23 L 476.45 10.04 L 462.2 10.04 L 462.2 89.31 L 476.68 89.31 L 476.68 57.6 C 476.68 49.1 482.42 44.74 489.54 44.74 C 496.66 44.74 502.41 49.56 502.41 57.6 L 502.41 89.31 L 517.12 89.31 L 517.12 57.6 C 516.88 42.67 508.38 30.95 491.84 30.95 "/><path d="M 322.73 37.38 C 322.73 28.43 329.4 23.14 337.21 23.14 C 345.25 23.14 351.68 28.66 351.68 37.38 C 351.68 45.66 345.02 51.63 337.21 51.63 C 329.17 51.63 322.73 45.66 322.73 37.38 M 365.93 37.38 C 365.93 21.07 353.75 9.81 337.21 9.81 C 321.82 9.81 308.49 19.92 308.49 38.3 L 308.49 89.31 L 322.96 89.31 L 322.96 60.82 L 350.77 89.31 L 369.61 89.31 L 344.33 63.35 C 357.2 60.59 365.93 49.56 365.93 37.38 "/><path d="M 198.89 78.97 C 189.47 78.97 182.12 70.7 182.12 61.51 C 182.12 52.32 189.24 44.28 198.89 44.28 C 209.0 44.28 215.89 52.32 215.89 61.51 C 215.89 70.7 209.0 78.97 198.89 78.97 M 198.89 31.64 C 181.66 31.64 167.88 44.28 167.88 61.51 C 167.88 78.51 181.2 91.61 198.89 91.61 C 216.81 91.61 230.14 78.97 230.14 61.51 C 230.14 44.28 216.58 31.64 198.89 31.64 "/><path d="M 265.52 78.97 C 256.56 78.97 248.98 71.16 248.98 61.28 C 248.98 51.86 256.56 44.28 265.52 44.28 C 276.09 44.28 282.75 52.55 282.75 61.51 C 282.75 70.24 276.32 78.97 265.52 78.97 M 282.75 36.92 C 278.16 33.48 271.5 31.64 265.52 31.64 C 248.75 31.64 234.73 44.28 234.73 61.28 C 234.73 78.97 248.52 91.61 265.52 91.61 C 284.13 91.61 296.77 79.66 296.77 59.67 L 296.77 10.04 L 282.75 10.04 Z M 282.75 36.92 "/><path d="M 132.03 78.97 C 122.61 78.97 115.26 70.7 115.26 61.51 C 115.26 52.32 122.38 44.28 132.03 44.28 C 142.14 44.28 149.03 52.32 149.03 61.51 C 149.03 70.7 142.14 78.97 132.03 78.97 M 132.03 31.64 C 114.8 31.64 101.01 44.28 101.01 61.51 C 101.01 78.51 114.34 91.61 132.03 91.61 C 149.95 91.61 163.28 78.97 163.28 61.51 C 163.28 44.28 149.72 31.64 132.03 31.64 "/></g></svg></div>
+  <h1>타운홀 포상 선정 기준,<br><span class="o">함께</span> 만들어 주세요</h1>
+  <p class="lead">한 사람, 한 팀의 생각이 아닌 여러분의 의견으로 정하려 합니다. 마음에 드는 안을 고르거나, 다른 생각을 자유롭게 적어 주세요.</p>
+  <div class="meta"><span>소요 시간 약 <b>3분</b></span><span>기한 <b>11월 25일(수)</b>까지</span><span>익명 제출</span></div>
+
+  <div class="closed" id="closed"><h2>설문이 마감되었습니다</h2><p>보내주신 의견은 최종 기준에 담아 다시 알려드리겠습니다.</p></div>
+  <div class="done" id="done"><h2>소중한 의견 고맙습니다</h2><p>보내주신 의견은 빠짐없이 읽고, 최종 기준에 담아 다시 알려드리겠습니다.</p></div>
+
+  <form id="f" novalidate>
+    <section class="q" data-name="ratio">
+      <h2><span class="n">1</span>팀 평가 : 임직원 투표 비율<span class="req">필수</span></h2>
+      <p class="help"><b class="fx">최종 점수 = 팀 평가 × a + 임직원 투표 × b</b><br>a : b를 어떤 비율로 하면 좋을까요?</p>
+      <div class="legend"><span><i style="background:var(--g)"></i>팀 평가</span><span><i style="background:var(--r)"></i>임직원 투표</span></div>
+      <div class="opts ratio">
+        <label class="opt"><input type="radio" name="ratio" value="①5:5"><div><div class="t">① 5 : 5</div><div class="d">같은 비중</div><div class="bar"><i style="width:50%;background:var(--g)">50</i><i style="width:50%;background:var(--r)">50</i></div></div></label>
+        <label class="opt"><input type="radio" name="ratio" value="②4:6"><div><div class="t">② 4 : 6</div><div class="d">임직원 의견 조금 더</div><div class="bar"><i style="width:40%;background:var(--g)">40</i><i style="width:60%;background:var(--r)">60</i></div></div></label>
+        <label class="opt"><input type="radio" name="ratio" value="③3:7"><div><div class="t">③ 3 : 7</div><div class="d">임직원 중심</div><div class="bar"><i style="width:30%;background:var(--g)">30</i><i style="width:70%;background:var(--r)">70</i></div></div></label>
+        <label class="opt"><input type="radio" name="ratio" value="④2:8"><div><div class="t">④ 2 : 8</div><div class="d">모두가 참여하는 선정</div><div class="bar"><i style="width:20%;background:var(--g)">20</i><i style="width:80%;background:var(--r)">80</i></div></div></label>
+      </div>
+    </section>
+
+    <section class="q" data-name="structure">
+      <h2><span class="n">2</span>팀 평가 구조<span class="req">필수</span></h2>
+      <p class="help">1차 때는 포상이, 2차 때는 기준이 없었습니다. 그래서 기준을 알고 준비하는 3차의 비중을 가장 높게 두고, 1·2차는 3차를 평가하는 근거로 반영합니다. 자세한 기준은 메일에 첨부한 팀 평가표(안)를 참고해 주세요.</p>
+      <div class="tbl">
+        <div><b>1차 10</b><span>과제 설정: 과제에 지표·기한이 있는지</span><em class="h">HR 판정</em></div>
+        <div><b>2차 20</b><span>협업 참여: 요청한 협업 · 요청받은 협업(응답률)</span><em class="d2">데이터</em></div>
+        <div><b>3차 70</b><span>실행 성과 30(HR) · 협업 이행·확산 10(데이터) · 완성도·효과 30(심사위원)</span><em class="j">3차 중심</em></div>
+      </div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="structure" value="적절"><div><div class="t">지금 구조가 적절해요</div><div class="d">3차 70 · 1·2차 30 / 객관 지표 70 · 심사위원 30</div></div></label>
+        <label class="opt"><input type="radio" name="structure" value="1·2차확대"><div><div class="t">1·2차 비중을 더 높여야 해요</div><div class="d">그동안의 준비와 참여를 더 인정</div></div></label>
+        <label class="opt"><input type="radio" name="structure" value="3차확대"><div><div class="t">3차 비중을 더 높여야 해요</div><div class="d">결과 중심으로 평가</div></div></label>
+        <label class="opt"><input type="radio" name="structure" value="심사위원확대"><div><div class="t">심사위원 판단 비중을 더 높여야 해요</div></div></label>
+        <label class="opt"><input type="radio" name="structure" value="기타"><div><div class="t">다른 생각이 있어요</div></div></label>
+      </div>
+      <input class="etc" type="text" id="structureEtc" maxlength="300" placeholder="바꾸고 싶은 항목·배점을 적어 주세요 (선택)">
+    </section>
+
+    <section class="q" data-name="basis">
+      <h2><span class="n">3</span>임직원 투표 기준<span class="req">필수</span></h2>
+      <p class="help">임직원 투표는 3차 발표(12.15~16)를 본 뒤 진행합니다. 어떤 질문으로 팀을 뽑으면 좋을까요?</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="basis" value="A.협업도움"><div><div class="t">A. 협업하며 가장 도움이 된 팀</div><div class="d">실제 함께 일한 경험 기반 — 협업 기회가 적은 팀은 불리할 수 있음</div></div></label>
+        <label class="opt"><input type="radio" name="basis" value="B.업무도움개선"><div><div class="t">B. 내 업무에 가장 도움이 된 개선을 한 팀</div><div class="d">개선 효과를 체감한 사람이 평가</div></div></label>
+        <label class="opt"><input type="radio" name="basis" value="C.가장잘한팀"><div><div class="t">C. 가장 잘했다고 생각하는 팀</div><div class="d">가장 단순하지만 인지도·발표력 영향이 큼</div></div></label>
+        <label class="opt"><input type="radio" name="basis" value="기타"><div><div class="t">다른 기준이 좋겠어요</div></div></label>
+      </div>
+      <input class="etc" type="text" id="basisEtc" maxlength="300" placeholder="다른 기준을 적어 주세요 (선택)">
+    </section>
+
+    <section class="q" data-name="unit">
+      <h2><span class="n">4</span>임직원 투표 단위<span class="req">필수</span></h2>
+      <p class="help">누가 표를 던질지 정합니다. 어느 쪽이든 본인 팀에는 투표할 수 없습니다.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="unit" value="개인단위"><div><div class="t">개인 단위</div><div class="d">임직원 각자 투표 · 개인 의견 반영</div></div></label>
+        <label class="opt"><input type="radio" name="unit" value="팀단위"><div><div class="t">팀 단위</div><div class="d">팀 논의 후 팀당 3표 · 규모 영향 없음</div></div></label>
+        <label class="opt"><input type="radio" name="unit" value="기타"><div><div class="t">다른 방법이 좋겠어요</div></div></label>
+      </div>
+      <input class="etc" type="text" id="unitEtc" maxlength="300" placeholder="다른 방법을 적어 주세요 (선택)">
+    </section>
+
+    <section class="q" data-name="vote">
+      <h2><span class="n">5</span>개인 단위로 투표한다면, 방식은?<span class="req">필수</span></h2>
+      <p class="help">인원이 많은 팀의 몰아주기를 막기 위한 방법입니다. 4번에서 팀 단위를 고르셨더라도 의견을 주세요.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="vote" value="A.1인3표"><div><div class="t">A. 1인 3표</div><div class="d">서로 다른 3개 팀에 나눠 투표 — 가장 단순함</div></div></label>
+        <label class="opt"><input type="radio" name="vote" value="B.팀별가중치"><div><div class="t">B. 팀별 가중치</div><div class="d">각 팀이 던진 표를 '팀당 1표'로 환산 — 인원수 영향 없음</div></div></label>
+        <label class="opt"><input type="radio" name="vote" value="C.점수평가"><div><div class="t">C. 점수 평가</div><div class="d">발표를 본 팀에 1~5점, 팀별 평균 — 공정하지만 참여 부담이 큼</div></div></label>
+        <label class="opt"><input type="radio" name="vote" value="기타"><div><div class="t">다른 방식이 좋겠어요</div></div></label>
+      </div>
+      <input class="etc" type="text" id="voteEtc" maxlength="300" placeholder="다른 방식을 적어 주세요 (선택)">
+    </section>
+
+    <section class="q" data-name="excludeDiv">
+      <h2><span class="n">6</span>본인 부문도 투표에서 제외할까요?<span class="req">필수</span></h2>
+      <p class="help">같은 부문끼리 밀어주는 것을 막을 수 있지만, 고를 수 있는 팀이 줄고 같은 부문 안에서 협업한 팀에는 투표할 수 없습니다.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="excludeDiv" value="제외필요"><div><div class="t">제외하는 것이 좋겠어요</div></div></label>
+        <label class="opt"><input type="radio" name="excludeDiv" value="제외불필요"><div><div class="t">본인 팀만 제외하면 충분해요</div></div></label>
+        <label class="opt"><input type="radio" name="excludeDiv" value="모름"><div><div class="t">잘 모르겠어요</div></div></label>
+      </div>
+    </section>
+
+    <section class="q">
+      <h2><span class="n">7</span>개인 포상은 어떤 사람이 받으면 모두가 인정할까요?</h2>
+      <p class="help">선택 · 한 줄이면 충분합니다.</p>
+      <textarea id="individual" maxlength="1000" placeholder="예: 다른 팀 협업 요청에 가장 먼저 응답한 사람"></textarea>
+    </section>
+
+    <section class="q">
+      <h2><span class="n">8</span>그 밖에 하고 싶은 말씀</h2>
+      <p class="help">선택 · 선정 기준이나 포상에 대한 생각을 자유롭게 적어 주세요.</p>
+      <textarea id="free" maxlength="2000"></textarea>
+    </section>
+
+    <section class="q">
+      <h2><span class="n">9</span>소속 부문</h2>
+      <p class="help">선택 · 의견을 부문별로 고르게 반영하기 위한 용도입니다. 원하지 않으시면 비워 두세요.</p>
+      <select id="division">
+        <option value="">선택 안 함</option>
+        <option>대표이사 직속</option><option>전략운영부문</option><option>재무투자부문</option><option>디지털AI혁신부문</option>
+        <option>영업마케팅부문</option><option>신채널사업부문</option><option>총괄사업부문</option><option>RP총괄수석부문</option><option>RM총괄수석부문</option>
+      </select>
+    </section>
+
+    <div class="anon"><b>익명으로 제출됩니다.</b> 이름·사번·이메일은 수집하지 않으며, 제출 시각과 응답 내용만 저장됩니다.</div>
+    <button type="submit" id="btn">의견 보내기</button>
+    <p class="err" id="err" role="alert"></p>
+  </form>
+
+  <p class="foot">문의: 전략HR팀 김현철 차장 02-6410-7245</p>
+</div>
+
+<script>
+/* ===== 설정 ===== */
+const ENDPOINT = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE'; // 구글 Apps Script 웹 앱 URL (…/exec)
+const DEADLINE = new Date('2026-11-25T23:59:59+09:00'); // 11월 25일(수) 자정 마감
+const SUBMITTED_KEY = 'townhall-criteria-2026q4-submitted';
+
+const $ = id => document.getElementById(id);
+const form = $('f');
+const show = el => { form.style.display = 'none'; el.style.display = 'block'; };
+const radio = n => (form.querySelector('input[name="'+n+'"]:checked') || {}).value || '';
+
+if (new Date() > DEADLINE) show($('closed'));
+else { try { if (localStorage.getItem(SUBMITTED_KEY)) show($('done')); } catch (e) {} }
+
+form.addEventListener('change', e => {
+  const sec = e.target.closest('.q'); if (sec) sec.classList.remove('missing');
+});
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  $('err').textContent = '';
+  const required = ['ratio', 'structure', 'basis', 'unit', 'vote', 'excludeDiv'];
+  const missing = required.filter(n => !radio(n));
+  form.querySelectorAll('.q').forEach(s => s.classList.toggle('missing', missing.includes(s.dataset.name)));
+  if (missing.length) {
+    $('err').textContent = '필수 문항 ' + missing.length + '개를 선택해 주세요.';
+    form.querySelector('.q.missing').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  if (new Date() > DEADLINE) { show($('closed')); return; }
+  if (!ENDPOINT.startsWith('https://script.google.com/')) {
+    $('err').textContent = '설정이 끝나지 않았습니다. (관리자: ENDPOINT에 Apps Script URL을 넣어 주세요)';
+    return;
+  }
+  const data = {
+    ratio: radio('ratio'), structure: radio('structure'), structureEtc: $('structureEtc').value.trim(),
+    basis: radio('basis'), basisEtc: $('basisEtc').value.trim(),
+    unit: radio('unit'), unitEtc: $('unitEtc').value.trim(),
+    vote: radio('vote'), voteEtc: $('voteEtc').value.trim(), excludeDiv: radio('excludeDiv'),
+    individual: $('individual').value.trim(), free: $('free').value.trim(), division: $('division').value
+  };
+  $('btn').disabled = true; $('btn').textContent = '보내는 중…';
+  try {
+    await fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) });
+    try { localStorage.setItem(SUBMITTED_KEY, '1'); } catch (e) {}
+    show($('done')); window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (err) {
+    $('err').textContent = '전송에 실패했습니다. 네트워크를 확인한 뒤 다시 눌러 주세요.';
+    $('btn').disabled = false; $('btn').textContent = '의견 보내기';
+  }
+});
+</script>
+</body>
+</html>

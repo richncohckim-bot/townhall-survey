@@ -65,6 +65,8 @@ textarea:focus,input[type=text]:focus,select:focus{outline:none;border-color:var
 button{width:100%;font:inherit;font-size:18px;font-weight:900;color:#fff;background:var(--ink);border:0;border-radius:12px;padding:16px;cursor:pointer}
 button:disabled{opacity:.5;cursor:default}
 button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset:2px}
+.reset{margin-top:10px;background:transparent;color:var(--muted);border:1.5px solid var(--line);font-size:15px;font-weight:700;padding:12px}
+.reset:hover{color:var(--ink);border-color:#cfc6b4}
 .err{color:var(--r);font-size:14px;font-weight:700;margin:8px 0 0;min-height:1em}
 .done,.closed{display:none;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 20px;text-align:center}
 .done h2,.closed h2{margin:0 0 8px;font-size:22px}
@@ -183,6 +185,7 @@ button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset
 
     <div class="anon"><b>익명으로 제출됩니다.</b> 이름·사번·이메일은 수집하지 않으며, 제출 시각과 응답 내용만 저장됩니다.</div>
     <button type="submit" id="btn">의견 보내기</button>
+    <button type="button" id="resetBtn" class="reset">입력 내용 지우기</button>
     <p class="err" id="err" role="alert"></p>
   </form>
 
@@ -200,8 +203,28 @@ const form = $('f');
 const show = el => { form.style.display = 'none'; el.style.display = 'block'; };
 const radio = n => (form.querySelector('input[name="'+n+'"]:checked') || {}).value || '';
 
+// 관리자·테스트용: 주소 끝에 ?reset 을 붙여 열면 이 브라우저의 제출 기록을 지웁니다
+if (new URLSearchParams(location.search).has('reset')) {
+  try { localStorage.removeItem(SUBMITTED_KEY); } catch (e) {}
+  history.replaceState(null, '', location.pathname);
+}
 if (new Date() > DEADLINE) show($('closed'));
 else { try { if (localStorage.getItem(SUBMITTED_KEY)) show($('done')); } catch (e) {} }
+
+$('resetBtn').addEventListener('click', () => {
+  if (!confirmReset()) return;
+  form.reset();
+  form.querySelectorAll('.q').forEach(sec => sec.classList.remove('missing'));
+  $('err').textContent = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+function confirmReset() {
+  const b = $('resetBtn');
+  if (b.dataset.armed) { delete b.dataset.armed; b.textContent = '입력 내용 지우기'; return true; }
+  b.dataset.armed = '1'; b.textContent = '한 번 더 누르면 모두 지워집니다';
+  setTimeout(() => { if (b.dataset.armed) { delete b.dataset.armed; b.textContent = '입력 내용 지우기'; } }, 3000);
+  return false;
+}
 
 form.addEventListener('change', e => {
   const sec = e.target.closest('.q'); if (sec) sec.classList.remove('missing');

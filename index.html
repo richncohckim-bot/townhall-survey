@@ -38,7 +38,7 @@ h1 .o{background:var(--o);padding:0 4px}
 .bar{display:flex;height:22px;border-radius:5px;overflow:hidden;gap:2px;margin-top:6px;width:100%;max-width:320px}
 .bar i{display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-size:12px;font-weight:700}
  .ratio{grid-template-columns:repeat(5,1fr)}
-.etcopt{margin-top:8px}
+.ratio + .etcrow{margin-top:8px}
 .ratio .opt{flex-direction:column;gap:6px;padding:12px 10px}
 .ratio .opt input{margin:0}
 .ratio .opt>div{width:100%;flex:1;display:flex;flex-direction:column}
@@ -56,8 +56,19 @@ textarea{min-height:96px;resize:vertical}
 @media (max-width:380px){#individual::placeholder{font-size:12.5px}}
 textarea:focus,input[type=text]:focus,select:focus{outline:none;border-color:var(--o)}
 .etc{margin-top:8px}
+.etcrow{align-items:center;padding:6px 14px;cursor:text}
+.etcrow input[type=radio]{margin-top:0}
+.etcrow .etcin{flex:1;width:auto;min-width:0;border:0;border-radius:0;padding:6px 0;font:inherit;font-size:16px;background:transparent;color:var(--ink)}
+.etcrow .etcin:focus{outline:none;border:0}
+.etcin::placeholder{color:#9a9a9a}
+.inl .opt{padding:10px 14px;align-items:center}
+.inl .opt input{margin-top:0}
+.inl .opt>div{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:10px}
+.inl .opt .d{font-size:13px}
 .tbl{display:grid;gap:6px;margin:0 0 12px}
-.tbl div{display:grid;grid-template-columns:52px 1fr auto;gap:8px;align-items:center;background:#faf8f3;border-radius:8px;padding:8px 10px;font-size:14px}
+.tbl div{display:grid;grid-template-columns:96px 1fr auto;gap:8px;align-items:center;background:#faf8f3;border-radius:8px;padding:8px 10px;font-size:14px}
+@media (max-width:480px){.tbl div{grid-template-columns:1fr auto;row-gap:2px}.tbl b{grid-column:1/-1}}
+.tbl .p1{background:#fff6e6}.tbl .p2{background:#ffe6bf}.tbl .p3{background:#ffcf85}
 .tbl b{font-weight:900}.tbl span{color:#3b3f48;word-break:keep-all}
 .tbl em{font-style:normal;font-size:11px;font-weight:700;color:#fff;border-radius:4px;padding:1px 6px;white-space:nowrap}
 .tbl .h{background:#737373}.tbl .d2{background:#3d6fb6}.tbl .j{background:var(--r)}
@@ -98,26 +109,24 @@ button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset
         <label class="opt"><input type="radio" name="ratio" value="④4:6"><div><div class="t">④ 4 : 6</div><div class="d">임직원 조금 더</div><div class="bar"><i style="width:40%;background:var(--g)">40</i><i style="width:60%;background:var(--r)">60</i></div></div></label>
         <label class="opt"><input type="radio" name="ratio" value="⑤3:7"><div><div class="t">⑤ 3 : 7</div><div class="d">임직원 중심</div><div class="bar"><i style="width:30%;background:var(--g)">30</i><i style="width:70%;background:var(--r)">70</i></div></div></label>
       </div>
-      <label class="opt etcopt"><input type="radio" name="ratio" value="기타"><div><div class="t">직접 입력</div><div class="d">다른 비율이 좋다면 적어 주세요</div></div></label>
-      <input class="etc" type="text" id="ratioEtc" maxlength="100" placeholder="예) 6 : 4 (선택)">
+      <div class="opt etcrow"><input type="radio" name="ratio" value="기타" aria-label="기타"><input class="etcin" type="text" id="ratioEtc" maxlength="100" placeholder="직접 입력 — 예) 6 : 4"></div>
     </section>
 
     <section class="q" data-name="structure">
       <h2><span class="n">2</span>심사 평가 구조<span class="req">필수</span></h2>
       <p class="help">1차는 포상 안내 전, 2차는 기준 확정 전입니다. 그래서 확정된 기준으로 준비하는 3차의 비중을 가장 높게 두고, 1·2차는 3차를 평가하는 근거로 반영합니다. 자세한 기준은 첨부 자료의 심사 평가표(안)를 참고해 주세요.</p>
       <div class="tbl">
-        <div><b>1차 5</b><span>과제 설정: 과제에 지표·기한이 있는지</span><em class="d2">정량</em></div>
-        <div><b>2차 15</b><span>협업 참여: 요청한 협업 · 요청받은 협업(응답률)</span><em class="d2">정량</em></div>
-        <div><b>3차 80</b><span>27년 우선과제 15 · 실행 성과 25 · 협업 이행·확산 10 · 완성도·효과 30(정성)</span><em class="j">정량·정성</em></div>
+        <div class="p1"><b>타운홀 1차 5</b><span>과제 설정: 과제에 지표·기한이 있는지</span><em class="d2">정량</em></div>
+        <div class="p2"><b>타운홀 2차 15</b><span>협업 참여: 요청한 협업 · 요청받은 협업(응답률)</span><em class="d2">정량</em></div>
+        <div class="p3"><b>타운홀 3차 80</b><span>27년 우선과제 15 · 실행 성과 25 · 협업 이행·확산 10 · 완성도·효과 30</span><em class="j">정량·정성</em></div>
       </div>
-      <div class="opts">
+      <div class="opts inl">
         <label class="opt"><input type="radio" name="structure" value="적절"><div><div class="t">지금 구조가 적절해요</div><div class="d">3차 80 · 1·2차 20 / 정량 70 · 정성 30</div></div></label>
         <label class="opt"><input type="radio" name="structure" value="1·2차확대"><div><div class="t">1·2차 비중을 더 높여야 해요</div><div class="d">그동안의 준비와 참여를 더 인정</div></div></label>
         <label class="opt"><input type="radio" name="structure" value="3차확대"><div><div class="t">3차 비중을 더 높여야 해요</div><div class="d">결과 중심으로 평가</div></div></label>
         <label class="opt"><input type="radio" name="structure" value="심사위원확대"><div><div class="t">정성 평가(심사위원) 비중을 더 높여야 해요</div></div></label>
-        <label class="opt"><input type="radio" name="structure" value="기타"><div><div class="t">다른 생각이 있어요</div></div></label>
+        <div class="opt etcrow"><input type="radio" name="structure" value="기타" aria-label="기타"><input class="etcin" type="text" id="structureEtc" maxlength="300" placeholder="다른 생각이 있어요 — 바꾸고 싶은 항목·배점"></div>
       </div>
-      <input class="etc" type="text" id="structureEtc" maxlength="300" placeholder="바꾸고 싶은 항목·배점을 적어 주세요 (선택)">
     </section>
 
     <section class="q" data-name="basis">
@@ -127,9 +136,8 @@ button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset
         <label class="opt"><input type="radio" name="basis" value="A.협업도움"><div><div class="t">A. 협업하며 가장 도움이 된 팀</div><div class="d">실제 함께 일한 경험 기반 — 협업 기회가 적은 팀은 불리할 수 있음</div></div></label>
         <label class="opt"><input type="radio" name="basis" value="B.업무도움개선"><div><div class="t">B. 내 업무에 가장 도움이 된 개선을 한 팀</div><div class="d">개선 효과를 체감한 사람이 평가</div></div></label>
         <label class="opt"><input type="radio" name="basis" value="C.가장잘한팀"><div><div class="t">C. 가장 잘했다고 생각하는 팀</div><div class="d">가장 단순하지만 인지도·발표력 영향이 큼</div></div></label>
-        <label class="opt"><input type="radio" name="basis" value="기타"><div><div class="t">다른 기준이 좋겠어요</div></div></label>
+        <div class="opt etcrow"><input type="radio" name="basis" value="기타" aria-label="기타"><input class="etcin" type="text" id="basisEtc" maxlength="300" placeholder="다른 기준이 좋겠어요 — 직접 적어 주세요"></div>
       </div>
-      <input class="etc" type="text" id="basisEtc" maxlength="300" placeholder="다른 기준을 적어 주세요 (선택)">
     </section>
 
     <section class="q" data-name="unit">
@@ -138,9 +146,8 @@ button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset
       <div class="opts">
         <label class="opt"><input type="radio" name="unit" value="개인단위"><div><div class="t">개인 단위</div><div class="d">임직원 각자 투표 · 개인 의견 반영</div></div></label>
         <label class="opt"><input type="radio" name="unit" value="팀단위"><div><div class="t">팀 단위</div><div class="d">팀 논의 후 팀당 3표 · 규모 영향 없음</div></div></label>
-        <label class="opt"><input type="radio" name="unit" value="기타"><div><div class="t">다른 방법이 좋겠어요</div></div></label>
+        <div class="opt etcrow"><input type="radio" name="unit" value="기타" aria-label="기타"><input class="etcin" type="text" id="unitEtc" maxlength="300" placeholder="다른 방법이 좋겠어요 — 직접 적어 주세요"></div>
       </div>
-      <input class="etc" type="text" id="unitEtc" maxlength="300" placeholder="다른 방법을 적어 주세요 (선택)">
     </section>
 
     <section class="q" data-name="vote">
@@ -150,35 +157,24 @@ button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset
         <label class="opt"><input type="radio" name="vote" value="A.1인3표"><div><div class="t">A. 1인 3표</div><div class="d">서로 다른 3개 팀에 나눠 투표 — 가장 단순함</div></div></label>
         <label class="opt"><input type="radio" name="vote" value="B.팀별가중치"><div><div class="t">B. 팀별 가중치</div><div class="d">각 팀이 던진 표를 '팀당 1표'로 환산 — 인원수 영향 없음</div></div></label>
         <label class="opt"><input type="radio" name="vote" value="C.점수평가"><div><div class="t">C. 점수 평가</div><div class="d">발표를 본 팀에 1~5점, 팀별 평균 — 공정하지만 참여 부담이 큼</div></div></label>
-        <label class="opt"><input type="radio" name="vote" value="기타"><div><div class="t">다른 방식이 좋겠어요</div></div></label>
-      </div>
-      <input class="etc" type="text" id="voteEtc" maxlength="300" placeholder="다른 방식을 적어 주세요 (선택)">
-    </section>
-
-    <section class="q" data-name="excludeDiv">
-      <h2><span class="n">6</span>본인 부문도 투표에서 제외할까요?<span class="req">필수</span></h2>
-      <p class="help">같은 부문끼리 밀어주는 것을 막을 수 있지만, 고를 수 있는 팀이 줄고 같은 부문 안에서 협업한 팀에는 투표할 수 없습니다.</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="excludeDiv" value="제외필요"><div><div class="t">제외하는 것이 좋겠어요</div></div></label>
-        <label class="opt"><input type="radio" name="excludeDiv" value="제외불필요"><div><div class="t">본인 팀만 제외하면 충분해요</div></div></label>
-        <label class="opt"><input type="radio" name="excludeDiv" value="모름"><div><div class="t">잘 모르겠어요</div></div></label>
+        <div class="opt etcrow"><input type="radio" name="vote" value="기타" aria-label="기타"><input class="etcin" type="text" id="voteEtc" maxlength="300" placeholder="다른 방식이 좋겠어요 — 직접 적어 주세요"></div>
       </div>
     </section>
 
     <section class="q">
-      <h2><span class="n">7</span>개인 포상은 어떤 사람이 받으면 모두가 인정할까요?</h2>
+      <h2><span class="n">6</span>개인 포상은 어떤 사람이 받으면 모두가 인정할까요?</h2>
       <p class="help">선택 · 한 줄이면 충분합니다.</p>
       <textarea id="individual" maxlength="1000" placeholder="예) 보이지 않는 곳에서 팀을 묵묵히 받쳐 준 사람&#10;예) 작은 개선이라도 끝까지 실행으로 옮긴 사람&#10;예) 함께 일한 부서가 먼저 이름을 떠올리는 사람"></textarea>
     </section>
 
     <section class="q">
-      <h2><span class="n">8</span>그 밖에 하고 싶은 말씀</h2>
+      <h2><span class="n">7</span>그 밖에 하고 싶은 말씀</h2>
       <p class="help">선택 · 선정 기준이나 포상에 대한 생각을 자유롭게 적어 주세요.</p>
       <textarea id="free" maxlength="2000"></textarea>
     </section>
 
     <section class="q">
-      <h2><span class="n">9</span>소속 부문</h2>
+      <h2><span class="n">8</span>소속 부문</h2>
       <p class="help">선택 · 의견을 부문별로 고르게 반영하기 위한 용도입니다. 원하지 않으시면 비워 두세요.</p>
       <select id="division">
         <option value="">선택 안 함</option>
@@ -239,6 +235,12 @@ function confirmReset() {
   });
 });
 
+form.querySelectorAll('.etcrow').forEach(row => {
+  const r = row.querySelector('input[type=radio]'), t = row.querySelector('.etcin');
+  row.addEventListener('click', e => { if (e.target !== r) t.focus(); });
+  t.addEventListener('focus', () => { r.checked = true; row.closest('.q').classList.remove('missing'); });
+});
+
 form.addEventListener('change', e => {
   const sec = e.target.closest('.q'); if (sec) sec.classList.remove('missing');
 });
@@ -246,7 +248,7 @@ form.addEventListener('change', e => {
 form.addEventListener('submit', async e => {
   e.preventDefault();
   $('err').textContent = '';
-  const required = ['ratio', 'structure', 'basis', 'unit', 'vote', 'excludeDiv'];
+  const required = ['ratio', 'structure', 'basis', 'unit', 'vote'];
   const missing = required.filter(n => !radio(n));
   form.querySelectorAll('.q').forEach(s => s.classList.toggle('missing', missing.includes(s.dataset.name)));
   if (missing.length) {
@@ -263,7 +265,7 @@ form.addEventListener('submit', async e => {
     ratio: radio('ratio'), ratioEtc: $('ratioEtc').value.trim(), structure: radio('structure'), structureEtc: $('structureEtc').value.trim(),
     basis: radio('basis'), basisEtc: $('basisEtc').value.trim(),
     unit: radio('unit'), unitEtc: $('unitEtc').value.trim(),
-    vote: radio('vote'), voteEtc: $('voteEtc').value.trim(), excludeDiv: radio('excludeDiv'),
+    vote: radio('vote'), voteEtc: $('voteEtc').value.trim(),
     individual: $('individual').value.trim(), free: $('free').value.trim(), division: $('division').value
   };
   $('btn').disabled = true; $('btn').textContent = '보내는 중…';

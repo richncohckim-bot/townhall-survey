@@ -38,6 +38,7 @@ h1 .o{background:var(--o);padding:0 4px}
 .bar{display:flex;height:22px;border-radius:5px;overflow:hidden;gap:2px;margin-top:6px;width:100%;max-width:320px}
 .bar i{display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-size:12px;font-weight:700}
  .ratio{grid-template-columns:repeat(4,1fr)}
+.etcopt{margin-top:8px}
 .ratio .opt{flex-direction:column;gap:6px;padding:12px 10px}
 .ratio .opt input{margin:0}
 .ratio .opt>div{width:100%;flex:1;display:flex;flex-direction:column}
@@ -96,6 +97,8 @@ button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset
         <label class="opt"><input type="radio" name="ratio" value="③3:7"><div><div class="t">③ 3 : 7</div><div class="d">임직원 중심</div><div class="bar"><i style="width:30%;background:var(--g)">30</i><i style="width:70%;background:var(--r)">70</i></div></div></label>
         <label class="opt"><input type="radio" name="ratio" value="④2:8"><div><div class="t">④ 2 : 8</div><div class="d">모두가 참여하는 선정</div><div class="bar"><i style="width:20%;background:var(--g)">20</i><i style="width:80%;background:var(--r)">80</i></div></div></label>
       </div>
+      <label class="opt etcopt"><input type="radio" name="ratio" value="기타"><div><div class="t">직접 입력</div><div class="d">다른 비율이 좋다면 적어 주세요</div></div></label>
+      <input class="etc" type="text" id="ratioEtc" maxlength="100" placeholder="예) 6 : 4 (선택)">
     </section>
 
     <section class="q" data-name="structure">
@@ -226,6 +229,15 @@ function confirmReset() {
   return false;
 }
 
+// '직접 입력'·'기타' 칸에 글을 쓰면 해당 문항의 기타 선택지를 자동으로 고릅니다
+[['ratioEtc','ratio'],['structureEtc','structure'],['basisEtc','basis'],['unitEtc','unit'],['voteEtc','vote']].forEach(([id, name]) => {
+  const el = $(id); if (!el) return;
+  el.addEventListener('input', () => {
+    const r = form.querySelector('input[name="' + name + '"][value="기타"]');
+    if (r && el.value.trim()) { r.checked = true; r.closest('.q').classList.remove('missing'); }
+  });
+});
+
 form.addEventListener('change', e => {
   const sec = e.target.closest('.q'); if (sec) sec.classList.remove('missing');
 });
@@ -247,7 +259,7 @@ form.addEventListener('submit', async e => {
     return;
   }
   const data = {
-    ratio: radio('ratio'), structure: radio('structure'), structureEtc: $('structureEtc').value.trim(),
+    ratio: radio('ratio'), ratioEtc: $('ratioEtc').value.trim(), structure: radio('structure'), structureEtc: $('structureEtc').value.trim(),
     basis: radio('basis'), basisEtc: $('basisEtc').value.trim(),
     unit: radio('unit'), unitEtc: $('unitEtc').value.trim(),
     vote: radio('vote'), voteEtc: $('voteEtc').value.trim(), excludeDiv: radio('excludeDiv'),

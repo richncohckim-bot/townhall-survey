@@ -37,7 +37,7 @@ h1 .o{background:var(--o);padding:0 4px}
 .opt>div{flex:1;min-width:0}
 .bar{display:flex;height:22px;border-radius:5px;overflow:hidden;gap:2px;margin-top:6px;width:100%;max-width:320px}
 .bar i{display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-size:12px;font-weight:700}
- .ratio{grid-template-columns:repeat(4,1fr)}
+ .ratio{grid-template-columns:repeat(5,1fr)}
 .etcopt{margin-top:8px}
 .ratio .opt{flex-direction:column;gap:6px;padding:12px 10px}
 .ratio .opt input{margin:0}
@@ -45,7 +45,7 @@ h1 .o{background:var(--o);padding:0 4px}
 .ratio .bar{max-width:none;margin-top:auto}
 .ratio .opt .d{margin-bottom:6px}
 .ratio .opt .d{font-size:13px;line-height:1.4}
-@media (max-width:560px){.ratio{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.ratio{grid-template-columns:repeat(3,1fr)}.ratio .opt .t{font-size:15px}.ratio .opt .d{font-size:12px;white-space:nowrap}}
 .fx{white-space:nowrap;color:var(--ink);font-size:15px}
 .legend{display:flex;gap:14px;font-size:13px;color:var(--muted);margin:-4px 0 12px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
@@ -92,10 +92,11 @@ button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset
       <p class="help"><b class="fx">최종 점수 = 심사 평가 × a + 임직원 투표 × b</b><br>a : b를 어떤 비율로 하면 좋을까요?</p>
       <div class="legend"><span><i style="background:var(--g)"></i>심사 평가</span><span><i style="background:var(--r)"></i>임직원 투표</span></div>
       <div class="opts ratio">
-        <label class="opt"><input type="radio" name="ratio" value="①5:5"><div><div class="t">① 5 : 5</div><div class="d">같은 비중</div><div class="bar"><i style="width:50%;background:var(--g)">50</i><i style="width:50%;background:var(--r)">50</i></div></div></label>
-        <label class="opt"><input type="radio" name="ratio" value="②4:6"><div><div class="t">② 4 : 6</div><div class="d">임직원 의견 조금 더</div><div class="bar"><i style="width:40%;background:var(--g)">40</i><i style="width:60%;background:var(--r)">60</i></div></div></label>
-        <label class="opt"><input type="radio" name="ratio" value="③3:7"><div><div class="t">③ 3 : 7</div><div class="d">임직원 중심</div><div class="bar"><i style="width:30%;background:var(--g)">30</i><i style="width:70%;background:var(--r)">70</i></div></div></label>
-        <label class="opt"><input type="radio" name="ratio" value="④2:8"><div><div class="t">④ 2 : 8</div><div class="d">임직원 의견 최대 반영</div><div class="bar"><i style="width:20%;background:var(--g)">20</i><i style="width:80%;background:var(--r)">80</i></div></div></label>
+        <label class="opt"><input type="radio" name="ratio" value="①7:3"><div><div class="t">① 7 : 3</div><div class="d">심사 중심</div><div class="bar"><i style="width:70%;background:var(--g)">70</i><i style="width:30%;background:var(--r)">30</i></div></div></label>
+        <label class="opt"><input type="radio" name="ratio" value="②6:4"><div><div class="t">② 6 : 4</div><div class="d">심사 조금 더</div><div class="bar"><i style="width:60%;background:var(--g)">60</i><i style="width:40%;background:var(--r)">40</i></div></div></label>
+        <label class="opt"><input type="radio" name="ratio" value="③5:5"><div><div class="t">③ 5 : 5</div><div class="d">같은 비중</div><div class="bar"><i style="width:50%;background:var(--g)">50</i><i style="width:50%;background:var(--r)">50</i></div></div></label>
+        <label class="opt"><input type="radio" name="ratio" value="④4:6"><div><div class="t">④ 4 : 6</div><div class="d">임직원 조금 더</div><div class="bar"><i style="width:40%;background:var(--g)">40</i><i style="width:60%;background:var(--r)">60</i></div></div></label>
+        <label class="opt"><input type="radio" name="ratio" value="⑤3:7"><div><div class="t">⑤ 3 : 7</div><div class="d">임직원 중심</div><div class="bar"><i style="width:30%;background:var(--g)">30</i><i style="width:70%;background:var(--r)">70</i></div></div></label>
       </div>
       <label class="opt etcopt"><input type="radio" name="ratio" value="기타"><div><div class="t">직접 입력</div><div class="d">다른 비율이 좋다면 적어 주세요</div></div></label>
       <input class="etc" type="text" id="ratioEtc" maxlength="100" placeholder="예) 6 : 4 (선택)">

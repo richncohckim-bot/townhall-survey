@@ -143,7 +143,7 @@ button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset
     <section class="q" data-name="unit">
       <h2><span class="n">4</span>임직원 투표 단위<span class="req">필수</span></h2>
       <p class="help">누가 표를 던질지 정합니다. 어느 쪽이든 본인 팀에는 투표할 수 없습니다.</p>
-      <div class="opts">
+      <div class="opts inl">
         <label class="opt"><input type="radio" name="unit" value="개인단위"><div><div class="t">개인 단위</div><div class="d">임직원 각자 투표 · 개인 의견 반영</div></div></label>
         <label class="opt"><input type="radio" name="unit" value="팀단위"><div><div class="t">팀 단위</div><div class="d">팀 논의 후 팀당 3표 · 규모 영향 없음</div></div></label>
         <div class="opt etcrow"><input type="radio" name="unit" value="기타" aria-label="기타"><input class="etcin" type="text" id="unitEtc" maxlength="300" placeholder="다른 방법이 좋겠어요 — 직접 적어 주세요"></div>
@@ -153,7 +153,7 @@ button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset
     <section class="q" data-name="vote">
       <h2><span class="n">5</span>개인 단위로 투표한다면, 방식은?<span class="req">필수</span></h2>
       <p class="help">인원이 많은 팀의 몰아주기를 막기 위한 방법입니다. 4번에서 팀 단위를 고르셨더라도 의견을 주세요.</p>
-      <div class="opts">
+      <div class="opts inl">
         <label class="opt"><input type="radio" name="vote" value="A.1인3표"><div><div class="t">A. 1인 3표</div><div class="d">서로 다른 3개 팀에 나눠 투표 — 가장 단순함</div></div></label>
         <label class="opt"><input type="radio" name="vote" value="B.팀별가중치"><div><div class="t">B. 팀별 가중치</div><div class="d">각 팀이 던진 표를 '팀당 1표'로 환산 — 인원수 영향 없음</div></div></label>
         <label class="opt"><input type="radio" name="vote" value="C.점수평가"><div><div class="t">C. 점수 평가</div><div class="d">발표를 본 팀에 1~5점, 팀별 평균 — 공정하지만 참여 부담이 큼</div></div></label>

@@ -50,6 +50,9 @@ h1 .o{background:var(--o);padding:0 4px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
 textarea,input[type=text],select{width:100%;font:inherit;font-size:16px;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff;color:var(--ink)}
 textarea{min-height:96px;resize:vertical}
+#individual{min-height:118px}
+#individual::placeholder{font-size:14px;line-height:1.7}
+@media (max-width:380px){#individual::placeholder{font-size:12.5px}}
 textarea:focus,input[type=text]:focus,select:focus{outline:none;border-color:var(--o)}
 .etc{margin-top:8px}
 .tbl{display:grid;gap:6px;margin:0 0 12px}
@@ -159,7 +162,7 @@ button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset
     <section class="q">
       <h2><span class="n">7</span>개인 포상은 어떤 사람이 받으면 모두가 인정할까요?</h2>
       <p class="help">선택 · 한 줄이면 충분합니다.</p>
-      <textarea id="individual" maxlength="1000" placeholder="예: 다른 팀 협업 요청에 가장 먼저 응답한 사람"></textarea>
+      <textarea id="individual" maxlength="1000" placeholder="예) 보이지 않는 곳에서 팀을 묵묵히 받쳐 준 사람&#10;예) 작은 개선이라도 끝까지 실행으로 옮긴 사람&#10;예) 함께 일한 부서가 먼저 이름을 떠올리는 사람"></textarea>
     </section>
 
     <section class="q">
@@ -188,7 +191,7 @@ button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset
 
 <script>
 /* ===== 설정 ===== */
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzHSKzyPb6fykfnTbxBah8P9SlA-nxtXjD_v53PL-Ez4r5UnjTgMPIjmeqtdH_98bE/exec'; // 구글 Apps Script 웹 앱 URL (…/exec)
+const ENDPOINT = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE'; // 구글 Apps Script 웹 앱 URL (…/exec)
 const DEADLINE = new Date('2026-11-25T23:59:59+09:00'); // 11월 25일(수) 자정 마감
 const SUBMITTED_KEY = 'townhall-criteria-2026q4-submitted';
 

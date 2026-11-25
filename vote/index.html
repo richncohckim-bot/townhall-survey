@@ -178,7 +178,7 @@ const PREVIEW=new URLSearchParams(location.search).has('preview'); // 관리자 
 const now=new Date();
 if(!PREVIEW && now<OPEN){form.style.display='none';$('notyet').style.display='block';}
 else if(!PREVIEW && now>CLOSE){form.style.display='none';$('closed').style.display='block';}
-const GROUPS={"소비자보호그룹": ["소비자보호그룹", "소비자보호팀"], "DB마케팅그룹": ["디지털마케팅팀", "DB사업팀"], "법인영업지원그룹": [], "영업운영그룹": ["영업운영그룹", "고객지원팀", "계약지원팀"], "영업지원그룹": ["RP영업지원팀"], "RM업무지원그룹": ["RM업무지원그룹", "RM업무지원팀", "RM재무지원팀"]};
+const GROUPS={"소비자보호그룹": ["소비자보호그룹", "소비자보호팀"], "DB마케팅그룹": ["디지털마케팅팀", "DB사업팀"], "영업운영그룹": ["영업운영그룹", "고객지원팀", "계약지원팀"], "영업지원그룹": ["RP영업지원팀"], "RM업무지원그룹": ["RM업무지원그룹", "RM업무지원팀", "RM재무지원팀"]};
 const blocked=(o,own)=>o.value===own||o.parentNode.label===own||(GROUPS[own]||[]).includes(o.value);
 function refresh(){const own=$('vteam').value;
  [1,2,3].forEach(i=>{const sel=$('t'+i);const o=sel.options[sel.selectedIndex];if(o&&o.value&&blocked(o,own))sel.value='';});
@@ -186,7 +186,7 @@ function refresh(){const own=$('vteam').value;
  [1,2,3].forEach(i=>{const sel=$('t'+i);[...sel.options].forEach(o=>{if(!o.value)return;o.disabled=blocked(o,own)||(picked.includes(o.value)&&sel.value!==o.value);});});}
 form.addEventListener('change',refresh);
 form.addEventListener('input',e=>{const t=e.target;if(t.tagName==='TEXTAREA'){t.style.height='auto';t.style.height=t.scrollHeight+3+'px';}});
-const LEVELS={"부문장": ["전략운영부문", "디지털AI혁신부문", "영업마케팅부문", "RP총괄수석부문", "RM총괄수석부문"], "그룹장": ["소비자보호그룹", "DB마케팅그룹", "법인영업지원그룹", "영업운영그룹", "영업지원그룹", "RM업무지원그룹"], "팀장": [["대표이사 직속", ["준법감시팀", "소비자보호팀"]], ["전략운영부문", ["전략기획팀", "수수료운영팀", "총무기획팀", "법무지원팀", "리스크관리팀"]], ["디지털AI혁신부문", ["수수료플랫폼팀", "설계사플랫폼팀", "인프라데이터팀", "IT신사업1팀", "IT신사업2팀", "UX디자인팀", "정보보호팀", "디지털마케팅팀", "DB사업팀"]], ["영업마케팅부문", ["채널전략팀", "채널교육팀", "상품전략팀", "전략파트너십팀"]], ["RP총괄수석부문", ["영업기획팀", "RP영업지원팀", "계약지원팀", "고객지원팀"]], ["RM총괄수석부문", ["RM영업기획팀", "RM업무지원팀", "RM재무지원팀"]]]};
+const LEVELS={"부문장": ["전략운영부문", "디지털AI혁신부문", "영업마케팅부문", "RP총괄수석부문", "RM총괄수석부문"], "그룹장": ["소비자보호그룹", "DB마케팅그룹", "영업운영그룹", "영업지원그룹", "RM업무지원그룹"], "팀장": [["대표이사 직속", ["준법감시팀", "소비자보호팀"]], ["전략운영부문", ["전략기획팀", "수수료운영팀", "총무기획팀", "법무지원팀", "리스크관리팀"]], ["디지털AI혁신부문", ["수수료플랫폼팀", "설계사플랫폼팀", "인프라데이터팀", "IT신사업1팀", "IT신사업2팀", "UX디자인팀", "정보보호팀", "디지털마케팅팀", "DB사업팀"]], ["영업마케팅부문", ["채널전략팀", "채널교육팀", "상품전략팀", "전략파트너십팀"]], ["RP총괄수석부문", ["영업기획팀", "RP영업지원팀", "계약지원팀", "고객지원팀"]], ["RM총괄수석부문", ["RM영업기획팀", "RM업무지원팀", "RM재무지원팀"]]]};
 let vlvl='';
 document.querySelectorAll('#vlvl button').forEach(b=>b.addEventListener('click',()=>{vlvl=b.dataset.l;document.querySelectorAll('#vlvl button').forEach(x=>x.classList.toggle('on',x===b));
  const sel=$('vteam');const d=LEVELS[vlvl];

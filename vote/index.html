@@ -125,6 +125,7 @@ h1{font-size:clamp(23px,6vw,28px)}
 .rank .no small{display:block;font-size:11px;color:var(--muted);font-weight:700}
 .rank select,.rank input,.rank textarea{margin-bottom:8px}
 .rank textarea{min-height:128px;word-break:keep-all}
+@media (min-width:600px){.rank textarea{min-height:68px}}
 @media (max-width:480px){.rank{grid-template-columns:40px 1fr;padding:10px}.rank input::placeholder,.rank textarea::placeholder{font-size:13px}.steps li{flex-direction:row}}
 .rank > div > :last-child{margin-bottom:0}
 .who{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -133,7 +134,7 @@ h1{font-size:clamp(23px,6vw,28px)}
 .named b{color:#a55f00}
 .pts{font-size:13px;color:var(--muted);margin:-4px 0 12px}
 .steps{list-style:none;display:flex;gap:8px;padding:0;margin:0 0 16px}
-.steps li{flex:1;display:flex;align-items:center;gap:8px;justify-content:center;background:#ece7dc;border-radius:999px;padding:8px;font-weight:900;font-size:14px;color:var(--muted)}
+.steps li{flex:1;display:flex;flex-direction:row;align-items:center;gap:8px;justify-content:center;background:#ece7dc;border-radius:999px;padding:8px;font-weight:900;font-size:14px;color:var(--muted)}
 .steps li b{width:22px;height:22px;border-radius:50%;background:#cfc6b4;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
 .steps li.st-on{background:var(--ink);color:#fff}.steps li.st-on b{background:var(--r)}
 .steps li.st-done{color:var(--ink)}.steps li.st-done b{background:var(--o)}
@@ -179,6 +180,7 @@ function refresh(){const own=$('vteam').value;
  const picked=[1,2,3].map(i=>$('t'+i).value);
  [1,2,3].forEach(i=>{const sel=$('t'+i);[...sel.options].forEach(o=>{if(!o.value)return;o.disabled=blocked(o,own)||(picked.includes(o.value)&&sel.value!==o.value);});});}
 form.addEventListener('change',refresh);
+form.addEventListener('input',e=>{const t=e.target;if(t.tagName==='TEXTAREA'){t.style.height='auto';t.style.height=t.scrollHeight+3+'px';}});
 const pages=[...form.querySelectorAll('.page')];let cur=1;
 function go(p){cur=p;pages.forEach(pg=>pg.classList.toggle('on',+pg.dataset.p===p));form.querySelectorAll('.steps li').forEach(li=>{const n=+li.dataset.s;li.classList.toggle('st-on',n===p);li.classList.toggle('st-done',n<p);});window.scrollTo({top:0,behavior:'smooth'});}
 function miss1(){const m=[];if(!$('vname').value.trim()||!$('vteam').value)m.push('voter');if([1,2,3].some(i=>!$('t'+i).value||!$('r'+i).value.trim()))m.push('teams');return m;}

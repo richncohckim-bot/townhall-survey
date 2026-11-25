@@ -1,0 +1,203 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>타운홀 직책자 투표</title><style>
+:root{--bg:#f6f3ec;--paper:#fff;--ink:#1b1b2f;--muted:#6b6f7a;--line:#e6e0d3;--r:#ef3554;--o:#ff9b00;--g:#737373;--soft:#fff4e0}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%}
+.wrap{max-width:720px;margin:0 auto;padding:28px 18px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.top svg{height:22px;width:auto}
+.eyebrow{font-size:14px;font-weight:700;color:var(--r)}
+h1{font-size:28px;line-height:1.3;margin:4px 0 10px;letter-spacing:-.02em;word-break:keep-all}
+h1 .o{background:var(--o);padding:0 4px}
+.lead{color:#3b3f48;margin:0 0 6px;word-break:keep-all}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 26px}
+.meta span{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px;font-weight:700}
+.meta span b{color:var(--r)}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 18px;margin-bottom:14px}
+.q h2{font-size:18px;margin:0 0 4px;display:flex;gap:8px;align-items:baseline;word-break:keep-all}
+.q h2 .n{flex:none;background:var(--ink);color:#fff;border-radius:6px;font-size:13px;padding:1px 8px}
+.q h2 .req{color:var(--r);font-size:13px;font-weight:700}
+.q .help{font-size:14px;color:var(--muted);margin:0 0 12px;word-break:keep-all}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color .12s,background .12s}
+.opt:hover{border-color:#cfc6b4}
+.opt input{margin-top:5px;accent-color:var(--r);width:18px;height:18px;flex:none}
+.opt:has(input:checked){border-color:var(--r);background:#fff7f8}
+.opt .t{font-weight:700;word-break:keep-all}
+.opt .d{font-size:14px;color:var(--muted);word-break:keep-all}
+.opt>div{flex:1;min-width:0}
+.bar{display:flex;height:22px;border-radius:5px;overflow:hidden;gap:2px;margin-top:6px;width:100%;max-width:320px}
+.bar i{display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-size:12px;font-weight:700}
+ .ratio{grid-template-columns:repeat(5,1fr)}
+.ratio + .etcrow{margin-top:8px}
+.ratio .opt{flex-direction:column;gap:6px;padding:12px 10px}
+.ratio .opt input{margin:0}
+.ratio .opt>div{width:100%;flex:1;display:flex;flex-direction:column}
+.ratio .bar{max-width:none;margin-top:auto}
+.ratio .opt .d{margin-bottom:6px}
+.ratio .opt .d{font-size:13px;line-height:1.4}
+@media (max-width:640px){.ratio{grid-template-columns:repeat(3,1fr)}.ratio .opt .t{font-size:15px}.ratio .opt .d{font-size:12px;white-space:nowrap}}
+.fx{white-space:nowrap;color:var(--ink);font-size:15px}
+.purpose{background:var(--paper);border:1.5px solid var(--ink);border-radius:14px;padding:14px 16px;margin:0 0 26px}
+.purpose .pt{font-weight:900;font-size:15px;margin-bottom:8px}
+.purpose .pl{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.purpose .pl span{background:#f4f1ea;border-radius:10px;padding:8px 10px;font-weight:900;font-size:15px;display:flex;flex-direction:column}
+.purpose .pl b{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--o);color:#fff;font-size:12px;align-items:center;justify-content:center;margin-bottom:4px}
+.purpose .pl small{font-weight:500;font-size:13px;color:var(--muted)}
+@media (max-width:560px){.purpose .pl{grid-template-columns:1fr}.purpose .pl span{flex-direction:row;align-items:center;gap:8px}.purpose .pl b{margin:0}}
+.sech{margin:30px 0 12px;padding-left:12px;border-left:5px solid var(--o)}
+.sech .sn{font-size:12px;font-weight:900;color:var(--r)}
+.sech h3{margin:0;font-size:21px;letter-spacing:-.02em}
+.sech p{margin:4px 0 0;font-size:14px;color:#3b3f48;word-break:keep-all}
+.sech .flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px;font-size:13px}
+.sech .flow span{background:#fff4e0;border:1px solid #ffd08a;border-radius:6px;padding:3px 8px;font-weight:700}
+.sech .flow i{font-style:normal;color:var(--r);font-weight:900}
+.sech .fn{font-size:13px;color:var(--muted)}
+.steps{list-style:none;display:flex;gap:4px;padding:0;margin:0 0 22px}
+.steps li{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--muted);font-weight:700;position:relative}
+.steps li b{width:26px;height:26px;border-radius:50%;background:#e6e0d3;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
+.steps li.st-on b{background:var(--r)}.steps li.st-done b{background:var(--o)}
+.steps li.st-on{color:var(--ink)}
+.steps li span{white-space:nowrap}
+.page{display:none}.page.on{display:block}
+.nav{display:flex;gap:10px;margin-top:18px}
+.nav button{flex:1}
+.nav .prev{flex:0 0 32%;background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.opt-tag{font-size:13px;color:var(--muted);font-weight:700}
+@media (max-width:420px){.steps li span{font-size:10.5px}}
+.legend{display:flex;gap:14px;font-size:13px;color:var(--muted);margin:-4px 0 12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+textarea,input[type=text],select{width:100%;font:inherit;font-size:16px;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff;color:var(--ink)}
+textarea{min-height:96px;resize:vertical}
+#individual{min-height:118px}
+#individual::placeholder{font-size:14px;line-height:1.7}
+@media (max-width:380px){#individual::placeholder{font-size:12.5px}}
+textarea:focus,input[type=text]:focus,select:focus{outline:none;border-color:var(--o)}
+.etc{margin-top:8px}
+.etcrow{align-items:center;padding:6px 14px;cursor:text}
+.etcrow input[type=radio]{margin-top:0}
+.etcrow .etcin{flex:1;width:auto;min-width:0;border:0;border-radius:0;padding:6px 0;font:inherit;font-size:16px;background:transparent;color:var(--ink)}
+.etcrow .etcin:focus{outline:none;border:0}
+.etcin::placeholder{color:#9a9a9a}
+.inl .opt{padding:10px 14px;align-items:center}
+.inl .opt input{margin-top:0}
+.inl .opt>div{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:10px}
+.inl .opt .d{font-size:13px}
+.tbl{display:grid;gap:6px;margin:0 0 12px}
+.tbl div{display:grid;grid-template-columns:96px 1fr auto;gap:8px;align-items:center;background:#faf8f3;border-radius:8px;padding:8px 10px;font-size:14px}
+@media (max-width:480px){.tbl div{grid-template-columns:1fr auto;row-gap:2px}.tbl b{grid-column:1/-1}}
+.tbl .p1{background:#fff6e6}.tbl .p2{background:#ffe6bf}.tbl .p3{background:#ffcf85}
+.tbl b{font-weight:900}.tbl span{color:#3b3f48;word-break:keep-all}
+.tbl em{font-style:normal;font-size:11px;font-weight:700;color:#fff;border-radius:4px;padding:1px 6px;white-space:nowrap}
+.tbl .h{background:#737373}.tbl .d2{background:#3d6fb6}.tbl .j{background:var(--r)}
+.anon{background:var(--soft);border-radius:10px;padding:12px 14px;font-size:14px;margin:6px 0 18px;word-break:keep-all}
+.anon b{color:#a55f00}
+button{width:100%;font:inherit;font-size:18px;font-weight:900;color:#fff;background:var(--ink);border:0;border-radius:12px;padding:16px;cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,.opt:focus-within{outline:3px solid var(--o);outline-offset:2px}
+.reset{margin-top:10px;background:transparent;color:var(--muted);border:1.5px solid var(--line);font-size:15px;font-weight:700;padding:12px}
+.reset:hover{color:var(--ink);border-color:#cfc6b4}
+.done .upd{color:var(--o);font-weight:700;margin:0 0 4px}
+.err{color:var(--r);font-size:14px;font-weight:700;margin:8px 0 0;min-height:1em}
+.done,.closed{display:none;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:32px 20px;text-align:center}
+.done h2,.closed h2{margin:0 0 8px;font-size:22px}
+.done p,.closed p{margin:0;color:#3b3f48;word-break:keep-all}
+.foot{margin-top:26px;font-size:13px;color:var(--muted);text-align:center}
+.missing{outline:2px solid var(--r);outline-offset:2px}
+
+/* ===== 화면 폭에 따라 글자 크기 자동 조절 ===== */
+h1{font-size:clamp(23px,6vw,28px)}
+.sech h3{font-size:clamp(18px,4.8vw,21px)}
+.q h2{font-size:clamp(16px,4.2vw,18px)}
+.q .help,.sech p{font-size:clamp(13px,3.4vw,14px)}
+.opt .t,.inl .opt .t{font-size:clamp(14px,3.7vw,16px)}
+.opt .d,.inl .opt .d{font-size:clamp(12px,3.1vw,13px)}
+.etcrow .etcin::placeholder{font-size:clamp(14px,3.7vw,16px)}
+.ratio .opt .t{font-size:15px}
+@media (max-width:560px){.q{padding:16px 14px}.opt{padding:10px 12px;gap:10px}.inl .opt{padding:9px 12px}.opts{gap:6px}.etcrow{padding:4px 12px}}
+
+.crit{background:#1b1b2f;color:#fff;border-radius:14px;padding:16px 18px;margin:0 0 22px}
+.crit .k{font-size:12px;font-weight:900;color:var(--o)}
+.crit .v{font-size:clamp(16px,4.2vw,19px);font-weight:900;margin-top:4px;word-break:keep-all}
+.crit .s{font-size:13px;color:#cfcfd8;margin-top:6px}
+.rank{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:start;border:1.5px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px}
+.rank .no{font-size:20px;font-weight:900;color:var(--r);text-align:center;padding-top:8px}
+.rank .no small{display:block;font-size:11px;color:var(--muted);font-weight:700}
+.rank select,.rank input,.rank textarea{margin-bottom:8px}
+.rank textarea{min-height:84px}
+@media (max-width:480px){.rank{grid-template-columns:40px 1fr;padding:10px}.rank input::placeholder,.rank textarea::placeholder{font-size:14px}.steps li{flex-direction:row}}
+.rank > div > :last-child{margin-bottom:0}
+.who{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:480px){.who{grid-template-columns:1fr}}
+.named{background:#fff1d6;border-radius:10px;padding:10px 14px;font-size:14px;margin:0 0 18px;word-break:keep-all}
+.named b{color:#a55f00}
+.pts{font-size:13px;color:var(--muted);margin:-4px 0 12px}
+.steps{list-style:none;display:flex;gap:8px;padding:0;margin:0 0 16px}
+.steps li{flex:1;display:flex;align-items:center;gap:8px;justify-content:center;background:#ece7dc;border-radius:999px;padding:8px;font-weight:900;font-size:14px;color:var(--muted)}
+.steps li b{width:22px;height:22px;border-radius:50%;background:#cfc6b4;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
+.steps li.st-on{background:var(--ink);color:#fff}.steps li.st-on b{background:var(--r)}
+.steps li.st-done{color:var(--ink)}.steps li.st-done b{background:var(--o)}
+.page{display:none}.page.on{display:block}
+.nav{display:flex;gap:10px;margin-top:6px}.nav button{flex:1}
+.nav .prev{flex:0 0 32%;background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+</style></head><body><div class="wrap">
+<div class="top"><div class="eyebrow">26년 4분기 전사 타운홀 · 3차</div><svg xmlns="http://www.w3.org/2000/svg" viewBox="21.05 6.60 496.07 85.24"><g fill="#FFA500"><path d="M 384.77 26.36 C 390.29 26.36 394.65 21.99 394.65 16.48 C 394.65 10.96 390.29 6.6 384.77 6.6 C 379.26 6.6 374.89 10.96 374.89 16.48 C 374.89 21.99 379.26 26.36 384.77 26.36 "/><path d="M 75.96 46.11 L 58.5 46.11 L 58.5 58.75 L 73.9 58.75 C 79.88 58.75 81.25 60.82 81.25 64.73 C 81.25 70.7 74.82 77.82 61.49 77.82 C 46.33 77.82 37.14 65.64 37.14 51.86 C 37.14 37.38 47.02 25.9 61.49 25.9 C 69.3 25.9 75.28 28.66 81.94 34.17 L 91.59 24.06 C 84.47 16.71 73.44 11.88 61.49 11.88 C 37.83 11.88 21.05 30.03 21.05 51.86 C 21.05 76.45 39.66 91.84 61.49 91.84 C 80.33 91.84 95.5 79.89 95.5 62.43 C 95.5 50.48 87.68 46.11 75.96 46.11 "/><path d="M 377.65 89.31 L 392.12 89.31 L 392.12 32.56 L 377.65 32.56 Z M 377.65 89.31 "/><path d="M 431.64 43.13 C 439.23 43.13 442.9 47.04 445.43 49.79 L 455.08 41.07 C 449.79 33.94 441.75 29.57 431.64 29.57 C 413.26 29.57 400.86 42.67 400.86 59.9 C 400.86 77.14 413.26 90 431.64 90 C 441.52 90 450.25 85.63 455.08 79.2 L 446.12 69.78 C 443.13 72.77 437.62 76.45 431.64 76.45 C 422.68 76.45 415.56 69.78 415.56 59.9 C 415.56 50.02 422.68 43.13 431.64 43.13 "/><path d="M 491.84 30.95 C 487.25 30.95 480.58 32.56 476.45 36.23 L 476.45 10.04 L 462.2 10.04 L 462.2 89.31 L 476.68 89.31 L 476.68 57.6 C 476.68 49.1 482.42 44.74 489.54 44.74 C 496.66 44.74 502.41 49.56 502.41 57.6 L 502.41 89.31 L 517.12 89.31 L 517.12 57.6 C 516.88 42.67 508.38 30.95 491.84 30.95 "/><path d="M 322.73 37.38 C 322.73 28.43 329.4 23.14 337.21 23.14 C 345.25 23.14 351.68 28.66 351.68 37.38 C 351.68 45.66 345.02 51.63 337.21 51.63 C 329.17 51.63 322.73 45.66 322.73 37.38 M 365.93 37.38 C 365.93 21.07 353.75 9.81 337.21 9.81 C 321.82 9.81 308.49 19.92 308.49 38.3 L 308.49 89.31 L 322.96 89.31 L 322.96 60.82 L 350.77 89.31 L 369.61 89.31 L 344.33 63.35 C 357.2 60.59 365.93 49.56 365.93 37.38 "/><path d="M 198.89 78.97 C 189.47 78.97 182.12 70.7 182.12 61.51 C 182.12 52.32 189.24 44.28 198.89 44.28 C 209.0 44.28 215.89 52.32 215.89 61.51 C 215.89 70.7 209.0 78.97 198.89 78.97 M 198.89 31.64 C 181.66 31.64 167.88 44.28 167.88 61.51 C 167.88 78.51 181.2 91.61 198.89 91.61 C 216.81 91.61 230.14 78.97 230.14 61.51 C 230.14 44.28 216.58 31.64 198.89 31.64 "/><path d="M 265.52 78.97 C 256.56 78.97 248.98 71.16 248.98 61.28 C 248.98 51.86 256.56 44.28 265.52 44.28 C 276.09 44.28 282.75 52.55 282.75 61.51 C 282.75 70.24 276.32 78.97 265.52 78.97 M 282.75 36.92 C 278.16 33.48 271.5 31.64 265.52 31.64 C 248.75 31.64 234.73 44.28 234.73 61.28 C 234.73 78.97 248.52 91.61 265.52 91.61 C 284.13 91.61 296.77 79.66 296.77 59.67 L 296.77 10.04 L 282.75 10.04 Z M 282.75 36.92 "/><path d="M 132.03 78.97 C 122.61 78.97 115.26 70.7 115.26 61.51 C 115.26 52.32 122.38 44.28 132.03 44.28 C 142.14 44.28 149.03 52.32 149.03 61.51 C 149.03 70.7 142.14 78.97 132.03 78.97 M 132.03 31.64 C 114.8 31.64 101.01 44.28 101.01 61.51 C 101.01 78.51 114.34 91.61 132.03 91.61 C 149.95 91.61 163.28 78.97 163.28 61.51 C 163.28 44.28 149.72 31.64 132.03 31.64 "/></g></svg></div>
+<h1>직책자 투표</h1>
+<p class="lead">12.18(금) 공개된 타운홀 자료를 보고, 포상받을 팀과 사람을 골라 주세요.</p>
+<div class="done" id="notyet" style="display:none"><h2 style="font-size:19px;word-break:keep-all">투표는 12월 21일(월)부터<br>열립니다</h2><p>12.18(금) 공개된 팀별 타운홀 자료를 먼저 살펴봐 주세요.</p></div>
+<div class="done" id="closed" style="display:none"><h2>투표가 마감되었습니다</h2><p>결과는 12월 24일(목) 오후에 발표합니다.</p></div>
+<div class="meta"><span>대상 <b>직책자(팀장 이상)</b></span><span>기한 <b>12.21(월)~23(수)</b></span><span>기명 투표</span></div>
+<div class="crit"><div class="k">이런 팀을 골라 주세요</div><div class="v">과제를 잘 세우고, 함께 협업하며, 실제로 바꿔 낸 팀</div><div class="s">타운홀 평가 기준: 과제 설정 · 협업 · 실행 · 완성도·효과</div></div>
+<div class="done" id="done"><h2>투표해 주셔서 고맙습니다</h2><p>결과는 심사 평가와 합산해 12월 24일(목) 오후에 발표합니다.</p></div>
+<form id="f" novalidate>
+<ol class="steps"><li data-s="1"><b>1</b><span>팀 부문</span></li><li data-s="2"><b>2</b><span>개인 부문</span></li></ol><div class="page" data-p="1"><section class="q" data-name="voter"><h2>투표자<span class="req">필수</span></h2>
+<div class="named"><b>기명 투표입니다.</b> 이름과 소속을 적어 주세요. 기한 안에 다시 내면 마지막 투표만 반영됩니다.</div>
+<div class="who"><input type="text" id="vname" maxlength="20" placeholder="이름"><select id="vteam"><option value="">소속 팀 선택</option><optgroup label="대표이사 직속"><option>준법감시팀</option><option>소비자보호팀</option><option>QA실</option><option>전략HR팀</option></optgroup><optgroup label="전략운영부문"><option>전략기획팀</option><option>수수료운영팀</option><option>총무기획팀</option><option>법무지원팀</option><option>리스크관리팀</option></optgroup><optgroup label="재무투자부문"><option>재무팀</option></optgroup><optgroup label="디지털AI혁신부문"><option>수수료플랫폼팀</option><option>설계사플랫폼팀</option><option>인프라데이터팀</option><option>IT신사업1팀</option><option>IT신사업2팀</option><option>UX디자인팀</option><option>정보보호팀</option><option>디지털마케팅팀</option><option>DB사업팀</option></optgroup><optgroup label="영업마케팅부문"><option>채널전략팀</option><option>브랜드전략실·시장개발실</option><option>채널교육팀</option><option>상품전략팀</option><option>전략파트너십팀</option></optgroup><optgroup label="RP총괄수석부문"><option>영업기획팀</option><option>RP영업지원팀</option><option>계약지원팀</option><option>고객지원팀</option><option>위촉지원실</option><option>주임단지원실</option></optgroup><optgroup label="총괄사업부문"><option>총괄영업지원팀</option></optgroup><optgroup label="RM총괄수석부문"><option>RM영업기획팀</option></optgroup></select></div></section>
+<section class="q" data-name="teams"><h2><span class="n">1</span>팀 부문 · 1~3위<span class="req">필수</span></h2>
+<p class="help">서로 다른 3개 팀을 골라 주세요. 본인 팀은 고를 수 없습니다.</p><p class="pts">1위 5점 · 2위 3점 · 3위 2점으로 집계 · 전략HR팀은 평가 대상이 아닙니다</p>
+<div class="rank"><div class="no">1위<small>5점</small></div><div><select id="t1"><option value="">팀 선택</option><optgroup label="대표이사 직속"><option>준법감시팀</option><option>소비자보호팀</option><option>QA실</option></optgroup><optgroup label="전략운영부문"><option>전략기획팀</option><option>수수료운영팀</option><option>총무기획팀</option><option>법무지원팀</option><option>리스크관리팀</option></optgroup><optgroup label="재무투자부문"><option>재무팀</option></optgroup><optgroup label="디지털AI혁신부문"><option>수수료플랫폼팀</option><option>설계사플랫폼팀</option><option>인프라데이터팀</option><option>IT신사업1팀</option><option>IT신사업2팀</option><option>UX디자인팀</option><option>정보보호팀</option><option>디지털마케팅팀</option><option>DB사업팀</option></optgroup><optgroup label="영업마케팅부문"><option>채널전략팀</option><option>브랜드전략실·시장개발실</option><option>채널교육팀</option><option>상품전략팀</option><option>전략파트너십팀</option></optgroup><optgroup label="RP총괄수석부문"><option>영업기획팀</option><option>RP영업지원팀</option><option>계약지원팀</option><option>고객지원팀</option><option>위촉지원실</option><option>주임단지원실</option></optgroup><optgroup label="총괄사업부문"><option>총괄영업지원팀</option></optgroup><optgroup label="RM총괄수석부문"><option>RM영업기획팀</option></optgroup></select><textarea id="r1" maxlength="300" placeholder="선정 사유 — 예) 중복 자료요청을 없애 다른 부서 업무 시간을 줄였습니다"></textarea></div></div><div class="rank"><div class="no">2위<small>3점</small></div><div><select id="t2"><option value="">팀 선택</option><optgroup label="대표이사 직속"><option>준법감시팀</option><option>소비자보호팀</option><option>QA실</option></optgroup><optgroup label="전략운영부문"><option>전략기획팀</option><option>수수료운영팀</option><option>총무기획팀</option><option>법무지원팀</option><option>리스크관리팀</option></optgroup><optgroup label="재무투자부문"><option>재무팀</option></optgroup><optgroup label="디지털AI혁신부문"><option>수수료플랫폼팀</option><option>설계사플랫폼팀</option><option>인프라데이터팀</option><option>IT신사업1팀</option><option>IT신사업2팀</option><option>UX디자인팀</option><option>정보보호팀</option><option>디지털마케팅팀</option><option>DB사업팀</option></optgroup><optgroup label="영업마케팅부문"><option>채널전략팀</option><option>브랜드전략실·시장개발실</option><option>채널교육팀</option><option>상품전략팀</option><option>전략파트너십팀</option></optgroup><optgroup label="RP총괄수석부문"><option>영업기획팀</option><option>RP영업지원팀</option><option>계약지원팀</option><option>고객지원팀</option><option>위촉지원실</option><option>주임단지원실</option></optgroup><optgroup label="총괄사업부문"><option>총괄영업지원팀</option></optgroup><optgroup label="RM총괄수석부문"><option>RM영업기획팀</option></optgroup></select><textarea id="r2" maxlength="300" placeholder="선정 사유 — 예) 2차에서 합의한 협업을 끝까지 실행했습니다"></textarea></div></div><div class="rank"><div class="no">3위<small>2점</small></div><div><select id="t3"><option value="">팀 선택</option><optgroup label="대표이사 직속"><option>준법감시팀</option><option>소비자보호팀</option><option>QA실</option></optgroup><optgroup label="전략운영부문"><option>전략기획팀</option><option>수수료운영팀</option><option>총무기획팀</option><option>법무지원팀</option><option>리스크관리팀</option></optgroup><optgroup label="재무투자부문"><option>재무팀</option></optgroup><optgroup label="디지털AI혁신부문"><option>수수료플랫폼팀</option><option>설계사플랫폼팀</option><option>인프라데이터팀</option><option>IT신사업1팀</option><option>IT신사업2팀</option><option>UX디자인팀</option><option>정보보호팀</option><option>디지털마케팅팀</option><option>DB사업팀</option></optgroup><optgroup label="영업마케팅부문"><option>채널전략팀</option><option>브랜드전략실·시장개발실</option><option>채널교육팀</option><option>상품전략팀</option><option>전략파트너십팀</option></optgroup><optgroup label="RP총괄수석부문"><option>영업기획팀</option><option>RP영업지원팀</option><option>계약지원팀</option><option>고객지원팀</option><option>위촉지원실</option><option>주임단지원실</option></optgroup><optgroup label="총괄사업부문"><option>총괄영업지원팀</option></optgroup><optgroup label="RM총괄수석부문"><option>RM영업기획팀</option></optgroup></select><textarea id="r3" maxlength="300" placeholder="선정 사유 — 예) 27년 과제를 지표와 기한까지 구체적으로 세웠습니다"></textarea></div></div></section>
+<p class="err" id="err1" role="alert"></p><div class="nav"><button type="button" class="next">다음 → 개인 부문</button></div></div><div class="page" data-p="2"><section class="q" data-name="people"><h2><span class="n">2</span>개인 부문 · 추천 2명<span class="req">필수</span></h2>
+<p class="help">타운홀 과제에서 눈에 띄게 기여한 사람을 추천해 주세요. 본인은 추천할 수 없습니다.</p><p class="pts">개인 포상 5명 = 심사위원 선정 2명 + 직책자 추천 상위 3명</p>
+<div class="rank"><div class="no">1<small>추천</small></div><div><input type="text" id="p1" maxlength="40" placeholder="이름 / 소속 팀 (예: 홍길동 / 계약지원팀)"><textarea id="pr1" maxlength="300" placeholder="추천 사유 — 예) 계약 심사 매뉴얼을 직접 만들어 팀 전체가 쓰게 했습니다"></textarea></div></div><div class="rank"><div class="no">2<small>추천</small></div><div><input type="text" id="p2" maxlength="40" placeholder="이름 / 소속 팀 (예: 홍길동 / 계약지원팀)"><textarea id="pr2" maxlength="300" placeholder="추천 사유 — 예) 다른 팀 요청에도 내 일처럼 함께 고민했습니다"></textarea></div></div></section>
+<div class="nav"><button type="button" class="prev">← 이전</button><button type="submit" id="btn">투표 제출</button></div></div><p class="err" id="err" role="alert"></p>
+</form>
+<p class="foot">문의: 전략HR팀 김현철 차장 02-6410-7245</p></div>
+<script>
+/* ===== 설정: Apps Script 웹 앱 URL ===== */
+const ENDPOINT='';
+
+const $=id=>document.getElementById(id);const form=$('f');
+const OPEN=new Date('2026-12-21T00:00:00+09:00'), CLOSE=new Date('2026-12-23T23:59:59+09:00');
+const PREVIEW=new URLSearchParams(location.search).has('preview'); // 관리자 미리보기: 주소 끝에 ?preview
+const now=new Date();
+if(!PREVIEW && now<OPEN){form.style.display='none';$('notyet').style.display='block';}
+else if(!PREVIEW && now>CLOSE){form.style.display='none';$('closed').style.display='block';}
+function refresh(){const own=$('vteam').value;const picked=[1,2,3].map(i=>$('t'+i).value);
+ [1,2,3].forEach(i=>{const sel=$('t'+i);[...sel.options].forEach(o=>{if(!o.value)return;o.disabled=(o.value===own)||(picked.includes(o.value)&&sel.value!==o.value);});if(sel.value===own)sel.value='';});}
+form.addEventListener('change',refresh);
+const pages=[...form.querySelectorAll('.page')];let cur=1;
+function go(p){cur=p;pages.forEach(pg=>pg.classList.toggle('on',+pg.dataset.p===p));form.querySelectorAll('.steps li').forEach(li=>{const n=+li.dataset.s;li.classList.toggle('st-on',n===p);li.classList.toggle('st-done',n<p);});window.scrollTo({top:0,behavior:'smooth'});}
+function miss1(){const m=[];if(!$('vname').value.trim()||!$('vteam').value)m.push('voter');if([1,2,3].some(i=>!$('t'+i).value||!$('r'+i).value.trim()))m.push('teams');return m;}
+form.addEventListener('click',e=>{if(e.target.classList.contains('next')){const m=miss1();form.querySelectorAll('.page[data-p="1"] .q').forEach(s=>s.classList.toggle('missing',m.includes(s.dataset.name)));if(m.length){$('err1').textContent='투표자 정보와 팀 3개·사유를 모두 채워 주세요.';return;}$('err1').textContent='';go(2);}
+ if(e.target.classList.contains('prev'))go(1);});
+go(1);
+
+form.addEventListener('submit',e=>{e.preventDefault();const miss=[];
+ if(!$('vname').value.trim()||!$('vteam').value)miss.push('voter');
+ if([1,2,3].some(i=>!$('t'+i).value||!$('r'+i).value.trim()))miss.push('teams');
+ if([1,2].some(i=>!$('p'+i).value.trim()||!$('pr'+i).value.trim()))miss.push('people');
+ form.querySelectorAll('.q').forEach(s=>s.classList.toggle('missing',miss.includes(s.dataset.name)));
+ if(miss.length){$('err').textContent='빈 칸을 채워 주세요 (팀 3개와 사유, 추천 2명과 사유).';return;}
+ const norm=v=>v.replace(/\s/g,'');const me=norm($('vname').value);
+ if(norm($('p1').value)===norm($('p2').value)){$('err').textContent='같은 사람을 두 번 추천할 수 없습니다.';return;}
+ if([1,2].some(i=>{const p=norm($('p'+i).value);return p===me||p.startsWith(me+'/');})){$('err').textContent='본인은 추천할 수 없습니다.';return;}
+ if(!ENDPOINT){$('err').textContent='투표 접수 준비 중입니다. 전략HR팀에 문의해 주세요.';return;}
+ const data={preview:PREVIEW};['vname','vteam','t1','t2','t3','r1','r2','r3','p1','p2','pr1','pr2'].forEach(k=>data[k]=$(k).value.trim());
+ const btn=$('btn');btn.disabled=true;btn.textContent='제출 중…';$('err').textContent='';
+ fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)})
+  .then(r=>r.json()).then(res=>{
+   if(!res.ok){$('err').textContent=res.msg||'제출하지 못했습니다. 다시 시도해 주세요.';btn.disabled=false;btn.textContent='투표 제출';return;}
+   if(res.updated)$('done').querySelector('p').insertAdjacentHTML('beforebegin','<p class="upd">이전 투표를 이번 내용으로 바꿨습니다.</p>');
+   form.style.display='none';$('done').style.display='block';window.scrollTo(0,0);})
+  .catch(()=>{$('err').textContent='연결이 원활하지 않습니다. 잠시 후 다시 제출해 주세요.';btn.disabled=false;btn.textContent='투표 제출';});});
+</script></body></html>

@@ -217,7 +217,7 @@ form.addEventListener('submit',e=>{e.preventDefault();const miss=[];
  form.querySelectorAll('.q').forEach(s=>s.classList.toggle('missing',miss.includes(s.dataset.name)));
  if(miss.length){$('err').textContent='빈 칸을 채워 주세요 (팀 3개와 사유, 추천 2명과 사유).';return;}
  const norm=v=>v.replace(/\s/g,'');const split=v=>{const [n,t='']=norm(v).split('/');return {n,t};};
- const same=(a,b)=>a.n===b.n&&(!a.t||!b.t||a.t===b.t);
+ const tm=t=>t.toLowerCase().replace(/(팀|그룹|실|부문)$/,'');const same=(a,b)=>{if(a.n.toLowerCase()!==b.n.toLowerCase())return false;const x=tm(a.t),y=tm(b.t);return !x||!y||x.includes(y)||y.includes(x);};
  const me={n:norm($('vname').value),t:norm($('vteam').value)};const q1=split($('p1').value),q2=split($('p2').value);
  if(same(q1,q2)){$('err').textContent='같은 사람을 두 번 추천할 수 없습니다.';return;}
  if([q1,q2].some(q=>same(q,me))){$('err').textContent='본인은 추천할 수 없습니다.';return;}
